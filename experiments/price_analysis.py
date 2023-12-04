@@ -6,8 +6,8 @@ import openai
 client = openai.OpenAI()
 
 assistant = client.beta.assistants.create(
-    name="Pizza Assistant",
-    instructions="You are an assistant to ordering my pizza and having them delivered quickly.",
+    name="Company Performance Analyst",
+    instructions="You are an assistant analyzing historical company performances.",
     tools=[{"type": "code_interpreter"}],
     model="gpt-4-1106-preview",
 )
@@ -17,13 +17,13 @@ thread = client.beta.threads.create()
 message = client.beta.threads.messages.create(
     thread_id=thread.id,
     role="user",
-    content="I need delivery to my house.",
+    content="Analysis the price performance of the two companies Britannia and JSW Steel.",
 )
 
 run = client.beta.threads.runs.create(
     thread_id=thread.id,
     assistant_id=assistant.id,
-    instructions="Please use deliveroo.ie for placing the online order.",
+    instructions="The files containing the historical price information are 1.csv for Britannia and 2.csv for JSW Steel. They are in the same folder as this python script.",
 )
 
 print("checking assistant status. ")
